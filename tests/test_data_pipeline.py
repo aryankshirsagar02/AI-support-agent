@@ -19,10 +19,13 @@ def test_clean_tweet_text():
 
 def test_mask_sensitive_info():
     text = "My email is customer@gmail.com and order is 114-1234567-7654321"
-    masked = mask_sensitive_info(text)
-    assert "customer@gmail.com" not in masked
-    assert "[EMAIL]" in masked
-    assert "[ORDER_ID]" in masked
+    masked_text, counts = mask_sensitive_info(text)
+    assert "customer@gmail.com" not in masked_text
+    assert "[EMAIL]" in masked_text
+    assert "[ORDER_ID]" in masked_text
+    assert counts["email"] == 1
+    assert counts["order_id"] == 1
+
 
 
 def test_leakage_free_splitting():

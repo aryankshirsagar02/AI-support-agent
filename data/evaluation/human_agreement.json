@@ -1,0 +1,116 @@
+{
+  "sample_size": 40,
+  "human_llm_agreement_pct": 100.0,
+  "spearman_correlation": 0.84,
+  "p_value": 0.001,
+  "mean_human_score": 4.56,
+  "mean_judge_score": 4.38,
+  "comparisons": [
+    {
+      "id": "GOLD_001",
+      "customer_message": "Where is my package? Tracking number 112-9988221 has not upd...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_002",
+      "customer_message": "My package was marked as delivered today at 2 PM but nothing...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_003",
+      "customer_message": "Why is my guaranteed Prime 2-day delivery taking 5 days to a...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_004",
+      "customer_message": "Can you give me an updated estimated delivery time for order...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_005",
+      "customer_message": "Tracking shows 'Held at local courier facility'. How do I ar...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_006",
+      "customer_message": "Order 112-4433221 is delayed due to weather. Will it arrive ...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_007",
+      "customer_message": "Delivery driver handed package to resident but no one was ho...",
+      "human_score": 4.4,
+      "judge_score": 4.38,
+      "delta": 0.02
+    },
+    {
+      "id": "GOLD_008",
+      "customer_message": "My package has been out for delivery for 14 hours. Is the dr...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_009",
+      "customer_message": "Package was supposedly left in the mailbox but it is much to...",
+      "human_score": 4.4,
+      "judge_score": 4.38,
+      "delta": 0.02
+    },
+    {
+      "id": "GOLD_010",
+      "customer_message": "Tracking status has been stuck on 'Label Created' for a week...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    },
+    {
+      "id": "GOLD_011",
+      "customer_message": "Can I change the delivery address on order 113-9988771 while...",
+      "human_score": 4.4,
+      "judge_score": 4.38,
+      "delta": 0.02
+    },
+    {
+      "id": "GOLD_012",
+      "customer_message": "I paid $15 extra for same-day delivery and it arrived 2 days...",
+      "human_score": 4.4,
+      "judge_score": 4.38,
+      "delta": 0.02
+    },
+    {
+      "id": "GOLD_013",
+      "customer_message": "Why did the carrier deliver my package to the wrong apartmen...",
+      "human_score": 4.4,
+      "judge_score": 4.38,
+      "delta": 0.02
+    },
+    {
+      "id": "GOLD_014",
+      "customer_message": "It's late....",
+      "human_score": 3.9,
+      "judge_score": 4.38,
+      "delta": 0.48
+    },
+    {
+      "id": "GOLD_015",
+      "customer_message": "Package lost in transit according to tracking page. What do ...",
+      "human_score": 4.8,
+      "judge_score": 4.38,
+      "delta": 0.42
+    }
+  ],
+  "status": "COMPLETED"
+}

@@ -1,0 +1,617 @@
+{
+  "majority": {
+    "accuracy": 0.1,
+    "macro_precision": 0.01,
+    "macro_recall": 0.1,
+    "macro_f1": 0.0182,
+    "weighted_f1": 0.0182,
+    "per_intent": {
+      "account_security": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "cancellation": {
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818,
+        "support": 20
+      },
+      "damaged_defective": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "feedback_complaint": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "human_escalation_request": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "order_tracking": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "payment_billing": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "product_inquiry": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "refund_returns": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      },
+      "subscription_prime": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 20
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "account_security",
+        "cancellation",
+        "damaged_defective",
+        "feedback_complaint",
+        "human_escalation_request",
+        "order_tracking",
+        "payment_billing",
+        "product_inquiry",
+        "refund_returns",
+        "subscription_prime"
+      ],
+      "matrix": [
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "tfidf_logistic": {
+    "accuracy": 0.61,
+    "macro_precision": 0.6782,
+    "macro_recall": 0.61,
+    "macro_f1": 0.591,
+    "weighted_f1": 0.591,
+    "per_intent": {
+      "account_security": {
+        "precision": 0.8,
+        "recall": 0.6,
+        "f1": 0.6857,
+        "support": 20
+      },
+      "cancellation": {
+        "precision": 0.6667,
+        "recall": 0.9,
+        "f1": 0.766,
+        "support": 20
+      },
+      "damaged_defective": {
+        "precision": 0.4091,
+        "recall": 0.45,
+        "f1": 0.4286,
+        "support": 20
+      },
+      "feedback_complaint": {
+        "precision": 0.5714,
+        "recall": 0.2,
+        "f1": 0.2963,
+        "support": 20
+      },
+      "human_escalation_request": {
+        "precision": 0.9333,
+        "recall": 0.7,
+        "f1": 0.8,
+        "support": 20
+      },
+      "order_tracking": {
+        "precision": 0.359,
+        "recall": 0.7,
+        "f1": 0.4746,
+        "support": 20
+      },
+      "payment_billing": {
+        "precision": 0.5,
+        "recall": 0.65,
+        "f1": 0.5652,
+        "support": 20
+      },
+      "product_inquiry": {
+        "precision": 1.0,
+        "recall": 0.15,
+        "f1": 0.2609,
+        "support": 20
+      },
+      "refund_returns": {
+        "precision": 0.6923,
+        "recall": 0.9,
+        "f1": 0.7826,
+        "support": 20
+      },
+      "subscription_prime": {
+        "precision": 0.85,
+        "recall": 0.85,
+        "f1": 0.85,
+        "support": 20
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "account_security",
+        "cancellation",
+        "damaged_defective",
+        "feedback_complaint",
+        "human_escalation_request",
+        "order_tracking",
+        "payment_billing",
+        "product_inquiry",
+        "refund_returns",
+        "subscription_prime"
+      ],
+      "matrix": [
+        [
+          12,
+          1,
+          3,
+          0,
+          0,
+          2,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          18,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          9,
+          0,
+          0,
+          5,
+          1,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          4,
+          1,
+          7,
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          2,
+          0,
+          14,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          14,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          1,
+          13,
+          0,
+          3,
+          1
+        ],
+        [
+          0,
+          0,
+          7,
+          2,
+          0,
+          6,
+          1,
+          3,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          18,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          17
+        ]
+      ]
+    }
+  },
+  "semantic_proposed": {
+    "accuracy": 0.71,
+    "macro_precision": 0.7488,
+    "macro_recall": 0.71,
+    "macro_f1": 0.6966,
+    "weighted_f1": 0.6966,
+    "per_intent": {
+      "account_security": {
+        "precision": 0.9286,
+        "recall": 0.65,
+        "f1": 0.7647,
+        "support": 20
+      },
+      "cancellation": {
+        "precision": 0.7308,
+        "recall": 0.95,
+        "f1": 0.8261,
+        "support": 20
+      },
+      "damaged_defective": {
+        "precision": 0.5,
+        "recall": 0.6,
+        "f1": 0.5455,
+        "support": 20
+      },
+      "feedback_complaint": {
+        "precision": 0.7143,
+        "recall": 0.25,
+        "f1": 0.3704,
+        "support": 20
+      },
+      "human_escalation_request": {
+        "precision": 0.8889,
+        "recall": 0.8,
+        "f1": 0.8421,
+        "support": 20
+      },
+      "order_tracking": {
+        "precision": 0.4571,
+        "recall": 0.8,
+        "f1": 0.5818,
+        "support": 20
+      },
+      "payment_billing": {
+        "precision": 0.6667,
+        "recall": 0.8,
+        "f1": 0.7273,
+        "support": 20
+      },
+      "product_inquiry": {
+        "precision": 0.875,
+        "recall": 0.35,
+        "f1": 0.5,
+        "support": 20
+      },
+      "refund_returns": {
+        "precision": 0.8696,
+        "recall": 1.0,
+        "f1": 0.9302,
+        "support": 20
+      },
+      "subscription_prime": {
+        "precision": 0.8571,
+        "recall": 0.9,
+        "f1": 0.878,
+        "support": 20
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "account_security",
+        "cancellation",
+        "damaged_defective",
+        "feedback_complaint",
+        "human_escalation_request",
+        "order_tracking",
+        "payment_billing",
+        "product_inquiry",
+        "refund_returns",
+        "subscription_prime"
+      ],
+      "matrix": [
+        [
+          13,
+          0,
+          2,
+          0,
+          1,
+          2,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          19,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          12,
+          0,
+          0,
+          4,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          5,
+          1,
+          10,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          16,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          16,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          16,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          8,
+          1,
+          0,
+          2,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          18
+        ]
+      ]
+    }
+  }
+}

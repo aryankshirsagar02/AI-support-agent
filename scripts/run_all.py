@@ -35,7 +35,10 @@ def main():
     run_cmd([PYTHON_EXEC, "scripts/run_baselines.py"], "3/4 Intent Model Training & Serialization")
 
     # 4. Comprehensive Evaluation & Benchmarking
-    run_cmd([PYTHON_EXEC, "scripts/evaluate.py"], "4/4 Golden Set Evaluation & 5-System Benchmark")
+    run_cmd([PYTHON_EXEC, "scripts/evaluate.py"], "4/5 Golden Set Evaluation & 5-System Benchmark")
+
+    # 5. Submission Validation
+    run_cmd([PYTHON_EXEC, "scripts/validate_submission.py"], "5/5 Full Submission Validation & Proof Verification")
 
     print("\n" + "*" * 70)
     print("ALL PIPELINE STAGES COMPLETED SUCCESSFULLY!")
@@ -46,3 +49,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

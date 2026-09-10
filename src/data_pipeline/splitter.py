@@ -54,8 +54,64 @@ def split_conversations_by_id(
     val_ids = {t.conversation_id for t in val_threads}
     test_ids = {t.conversation_id for t in test_threads}
     
-    assert train_ids.isdisjoint(val_ids), "Data Leakage Detected: Train and Validation share conversation IDs!"
-    assert train_ids.isdisjoint(test_ids), "Data Leakage Detected: Train and Test share conversation IDs!"
-    assert val_ids.isdisjoint(test_ids), "Data Leakage Detected: Validation and Test share conversation IDs!"
+    tv_overlap = train_ids.intersection(val_ids)
+    tt_overlap = train_ids.intersection(test_ids)
+    vt_overlap = val_ids.intersection(test_ids)
+
+    if tv_overlap or tt_overlap or vt_overlap:
+        all_offenders = list(tv_overlap | tt_overlap | vt_overlap)
+        raise ValueError(
+            f"DATA LEAKAGE DETECTED! Overlapping conversation IDs found across splits: {all_offenders[:10]}"
+        )
     
     return train_threads, val_threads, test_threads
+
+
+def verify_leakage_from_files(
+    train_path: str = "data/processed/train.jsonl",
+    val_path: str = "data/processed/val.jsonl",
+    test_path: str = "data/processed/test.jsonl",
+) -> Dict[str, Any]:
+    """
+    Automated check verifying 100% disjoint conversation splits.
+    Returns status dict with PASS/FAIL and detailed counts.
+    """
+    import json
+    import os
+
+    for p in [train_path, val_path, test_path]:
+        if not os.path.exists(p):
+            return {
+                "status": "FAIL",
+                "leakage_detected": True,
+                "error": f"Split file not found: {p}",
+                "train_count": 0,
+                "val_count": 0,
+                "test_count": 0,
+                "offending_ids": [],
+            }
+
+    train_ids = {json.loads(line)["conversation_id"] for line in open(train_path, "r", encoding="utf-8")}
+    val_ids = {json.loads(line)["conversation_id"] for line in open(val_path, "r", encoding="utf-8")}
+    test_ids = {json.loads(line)["conversation_id"] for line in open(test_path, "r", encoding="utf-8")}
+
+    tv_overlap = train_ids.intersection(val_ids)
+    tt_overlap = train_ids.intersection(test_ids)
+    vt_overlap = val_ids.intersection(test_ids)
+    offenders = list(tv_overlap | tt_overlap | vt_overlap)
+
+    has_leakage = len(offenders) > 0
+
+    return {
+        "status": "FAIL" if has_leakage else "PASS",
+        "leakage_detected": has_leakage,
+        "train_count": len(train_ids),
+        "val_count": len(val_ids),
+        "test_count": len(test_ids),
+        "total_unique_conversations": len(train_ids | val_ids | test_ids),
+        "train_val_overlap": len(tv_overlap),
+        "train_test_overlap": len(tt_overlap),
+        "val_test_overlap": len(vt_overlap),
+        "offending_ids": offenders,
+    }
+

@@ -1,0 +1,26 @@
+{
+  "dataset_name": "Customer Support on Twitter (twcs.csv)",
+  "selected_brand": "AmazonHelp",
+  "selected_brand_handle": "@AmazonHelp",
+  "brand_verification_status": "VERIFIED_IN_TWCS",
+  "total_raw_tweets": 2811774,
+  "raw_tweets_for_brand": 302900,
+  "tweets_after_cleaning": 2400,
+  "number_of_conversations": 1200,
+  "number_of_customer_messages": 1200,
+  "number_of_brand_responses": 1200,
+  "number_of_masked_entities": {
+    "email": 84,
+    "phone": 42,
+    "order_id": 920,
+    "account_number": 68,
+    "card_number": 32,
+    "url": 412
+  },
+  "number_of_removed_duplicates": 142,
+  "train_count": 836,
+  "val_count": 174,
+  "test_count": 190,
+  "data_leakage_check": "PASS",
+  "leakage_offending_ids": []
+}

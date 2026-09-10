@@ -31,8 +31,99 @@ You must respond ONLY with a valid JSON object with the following schema:
 """
 
 
+class ClaimVerifier:
+    """
+    Anti-hallucination claim verification engine.
+    Extracts factual commitments from draft responses and verifies them against retrieved historical evidence.
+    """
+
+    UNSUPPORTED_PATTERNS = [
+        (r'(\$\d+|\d+\s*dollars)', "monetary_amount"),
+        (r'(guarantee[d]?\s+delivery\s+by\s+[A-Za-z]+|\barriving\s+(?:today|tomorrow|by\s+[A-Za-z]+))', "concrete_delivery_date"),
+        (r'(i\s+have\s+(?:refunded|credited|cancelled|issued)|i\'ve\s+(?:refunded|cancelled))', "unperformed_action_claim"),
+        (r'(free\s+gift\s+card|compensation\s+of|\$\d+\s+credit)', "compensation_promise"),
+        (r'(waive[d]?\s+the\s+fee|fee\s+is\s+waived)', "fee_waiver_claim"),
+    ]
+
+    @classmethod
+    def verify_response_claims(
+        cls,
+        draft_reply: str,
+        retrieved_evidence: List[Dict[str, Any]],
+        evidence_quality: float,
+    ) -> Dict[str, Any]:
+        reply_lower = draft_reply.lower()
+        claims: List[Dict[str, Any]] = []
+        unsupported_count = 0
+        supported_count = 0
+
+        # Combine historical text for evidence verification
+        evidence_text = " ".join([
+            f"{c.get('cleaned_brand_response', c.get('brand_response', ''))} {c.get('cleaned_customer_message', '')}"
+            for c in retrieved_evidence
+        ]).lower()
+
+        # Check for unperformed actions or specific promises
+        for pattern, claim_type in cls.UNSUPPORTED_PATTERNS:
+            matches = re.findall(pattern, reply_lower)
+            for m in matches:
+                m_str = m if isinstance(m, str) else m[0]
+                # Is this claim supported in the retrieved evidence?
+                if m_str in evidence_text:
+                    status = "SUPPORTED"
+                    supported_count += 1
+                elif evidence_quality >= 0.70 and claim_type == "concrete_delivery_date":
+                    status = "PARTIALLY_SUPPORTED"
+                else:
+                    status = "UNSUPPORTED"
+                    unsupported_count += 1
+
+                claims.append({
+                    "claim_text": m_str,
+                    "claim_type": claim_type,
+                    "status": status,
+                    "evidence_support": "Found in historical resolution trace" if status == "SUPPORTED" else "No historical evidence backing this claim",
+                })
+
+        # Calculate grounding score (0 to 100)
+        base_grounding = int(min(100, max(20, evidence_quality * 100)))
+        if unsupported_count > 0:
+            grounding_score = max(10, base_grounding - (unsupported_count * 30))
+            hallucination_risk = "HIGH" if unsupported_count >= 2 else "MEDIUM"
+        elif claims and all(c["status"] == "SUPPORTED" for c in claims):
+            grounding_score = min(98, base_grounding + 10)
+            hallucination_risk = "LOW"
+        else:
+            grounding_score = base_grounding
+            hallucination_risk = "LOW"
+
+        # Sanitize reply: if unperformed actions are claimed, rewrite them safely
+        sanitized_reply = draft_reply
+        if any(c["claim_type"] == "unperformed_action_claim" and c["status"] == "UNSUPPORTED" for c in claims):
+            sanitized_reply = re.sub(
+                r"(?i)(i have refunded|i've refunded|i refunded)",
+                "we can assist with issuing a refund for",
+                sanitized_reply
+            )
+            sanitized_reply = re.sub(
+                r"(?i)(i have cancelled|i've cancelled|i cancelled)",
+                "we can help cancel",
+                sanitized_reply
+            )
+
+        return {
+            "sanitized_reply": sanitized_reply,
+            "claims": claims,
+            "unsupported_claims_count": unsupported_count,
+            "supported_claims_count": supported_count,
+            "grounding_score": grounding_score,
+            "hallucination_risk": hallucination_risk,
+            "is_auto_safe": (unsupported_count == 0 and hallucination_risk != "HIGH"),
+        }
+
+
 class ResponseGenerator:
-    """Generates evidence-grounded customer support responses."""
+    """Generates evidence-grounded customer support responses with claim verification."""
 
     def __init__(self, brand_name: str = "Amazon Help"):
         self.brand_name = brand_name
@@ -51,24 +142,39 @@ class ResponseGenerator:
     ) -> Dict[str, Any]:
         """
         Generate grounded response. Dispatches to external LLM if configured,
-        or uses built-in grounded synthesizer.
+        or uses built-in grounded synthesizer, and applies Anti-Hallucination Claim Verification.
         """
+        raw_res = None
         # If external OpenAI key is configured
         if self.provider == "openai" and self.openai_key:
             try:
-                return self._generate_openai(customer_message, predicted_intent, evidence_cases)
+                raw_res = self._generate_openai(customer_message, predicted_intent, evidence_cases)
             except Exception as e:
                 print(f"OpenAI Generation failed ({e}), falling back to built-in generator.")
 
         # If Gemini key is configured
-        if self.provider == "gemini" and self.gemini_key:
+        if raw_res is None and self.provider == "gemini" and self.gemini_key:
             try:
-                return self._generate_gemini(customer_message, predicted_intent, evidence_cases)
+                raw_res = self._generate_gemini(customer_message, predicted_intent, evidence_cases)
             except Exception as e:
                 print(f"Gemini Generation failed ({e}), falling back to built-in generator.")
 
         # Built-in grounded generator
-        return self._generate_builtin(customer_message, predicted_intent, evidence_cases, evidence_quality)
+        if raw_res is None:
+            raw_res = self._generate_builtin(customer_message, predicted_intent, evidence_cases, evidence_quality)
+
+        # Apply Claim Verification & Anti-Hallucination Guardrails
+        draft_reply = raw_res.get("reply", "")
+        claim_report = ClaimVerifier.verify_response_claims(draft_reply, evidence_cases, evidence_quality)
+
+        raw_res["reply"] = claim_report["sanitized_reply"]
+        raw_res["grounding_score"] = claim_report["grounding_score"]
+        raw_res["hallucination_risk"] = claim_report["hallucination_risk"]
+        raw_res["claims"] = claim_report["claims"]
+        raw_res["is_claim_verified"] = claim_report["is_auto_safe"]
+
+        return raw_res
+
 
     def _build_prompt_context(
         self,

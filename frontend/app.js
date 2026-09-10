@@ -12,11 +12,32 @@ let activeChart = null;
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   loadView('dashboard');
+  checkBackendHealth();
+  setInterval(checkBackendHealth, 8000);
   
   document.getElementById('btn-quick-run-eval')?.addEventListener('click', () => {
     runEvaluationPipeline();
   });
 });
+
+async function checkBackendHealth() {
+  const badge = document.getElementById('system-status-badge');
+  if (!badge) return;
+  try {
+    const res = await fetch('/health');
+    if (res.ok) {
+      const data = await res.json();
+      badge.className = 'badge badge-green';
+      badge.innerHTML = `<span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block;"></span> Pipeline Active (${data.brand || 'Amazon Help'})`;
+    } else {
+      badge.className = 'badge badge-red';
+      badge.innerHTML = `<span style="width: 6px; height: 6px; border-radius: 50%; background: #ef4444; display: inline-block;"></span> Service Degraded`;
+    }
+  } catch (e) {
+    badge.className = 'badge badge-red';
+    badge.innerHTML = `<span style="width: 6px; height: 6px; border-radius: 50%; background: #ef4444; display: inline-block;"></span> Backend Offline`;
+  }
+}
 
 // Navigation Handling
 function initNavigation() {
@@ -32,6 +53,7 @@ function initNavigation() {
     });
   });
 }
+
 
 const VIEW_METADATA = {
   dashboard: { title: 'Executive Dashboard', desc: 'Real-time customer support metrics, intent volumes, and trust KPIs.' },

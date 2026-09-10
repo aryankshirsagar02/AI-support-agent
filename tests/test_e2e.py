@@ -70,3 +70,44 @@ def test_settings_endpoints():
     assert res_test.status_code == 200
     data = res_test.json()
     assert data["status"] in ["HEALTHY", "DEGRADED"]
+
+
+def test_predict_endpoint():
+    payload = {"message": "My package was marked delivered but I cannot find it."}
+    res = client.post("/predict", json=payload)
+    assert res.status_code == 200
+    data = res.json()
+    assert "intent" in data
+    assert "trust_score" in data
+    assert "decision" in data
+    assert "reply" in data
+
+
+def test_support_reply_and_decision_endpoints():
+    reply_res = client.post("/support/reply", json={"message": "Can I cancel my order?", "intent": "cancellation"})
+    assert reply_res.status_code == 200
+    assert "reply" in reply_res.json()
+
+    dec_res = client.post("/support/decision", json={"message": "I will sue you in court if you don't call me."})
+    assert dec_res.status_code == 200
+    dec_data = dec_res.json()
+    assert dec_data["decision"] == "HUMAN_ESCALATION"
+    assert dec_data["state"] == "RED"
+
+
+def test_golden_set_and_evaluation_endpoints():
+    res_golden = client.get("/golden-set")
+    assert res_golden.status_code == 200
+    assert res_golden.json()["total"] == 200
+
+    res_eval = client.get("/evaluation/results")
+    assert res_eval.status_code == 200
+    assert "supportiq" in res_eval.json()
+
+    res_fail = client.get("/failure-analysis")
+    assert res_fail.status_code == 200
+
+    res_log = client.get("/decision-log")
+    assert res_log.status_code == 200
+    assert "raw_markdown" in res_log.json()
+

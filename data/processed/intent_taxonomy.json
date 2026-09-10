@@ -1,0 +1,299 @@
+[
+  {
+    "intent": "order_tracking",
+    "name": "Order Tracking & Delivery Delay",
+    "description": "Inquiries regarding package shipping status, estimated delivery dates, carrier delays, or tracking issues.",
+    "typical_action": "AUTO",
+    "risk_level": "LOW",
+    "keywords": [
+      "tracking",
+      "where is my order",
+      "shipped",
+      "delivery",
+      "late",
+      "arrived",
+      "carrier",
+      "transit",
+      "package",
+      "where is it",
+      "out for delivery"
+    ],
+    "examples": [
+      "Where is my package? It was supposed to be delivered yesterday! Order #112-8874921.",
+      "My tracking says 'Out for delivery' since 8 AM but nothing showed up. Any updates?",
+      "Can you tell me the carrier tracking number for order #114-9923812? Status is stuck on dispatched.",
+      "The delivery driver marked my package as delivered, but I checked my porch, mailbox, and neighbors and nothing is there."
+    ],
+    "labeling_rules": [
+      "Classify as 'order_tracking' if customer inquires about order tracking & delivery delay.",
+      "Default risk category: LOW.",
+      "Standard routing state: AUTO."
+    ]
+  },
+  {
+    "intent": "refund_returns",
+    "name": "Refund & Return Inquiries",
+    "description": "Questions about return drop-off, return labels, refund status, and refund processing timeframes.",
+    "typical_action": "AUTO",
+    "risk_level": "LOW",
+    "keywords": [
+      "refund",
+      "return",
+      "returned",
+      "drop off",
+      "return label",
+      "money back",
+      "reimbursement",
+      "refund status",
+      "credit",
+      "exchange"
+    ],
+    "examples": [
+      "I returned my shoes 7 days ago via UPS drop-off. When will my refund be processed to my card?",
+      "Can I get a return label for order #113-8829102? The item does not fit properly.",
+      "My return was delivered to your fulfillment center on Tuesday according to tracking, but no refund notification yet.",
+      "How long does it take for a refund to show up on my original payment method after return?"
+    ],
+    "labeling_rules": [
+      "Classify as 'refund_returns' if customer inquires about refund & return inquiries.",
+      "Default risk category: LOW.",
+      "Standard routing state: AUTO."
+    ]
+  },
+  {
+    "intent": "damaged_defective",
+    "name": "Damaged / Defective / Wrong Item",
+    "description": "Reports of items arriving broken, opened, missing components, or receiving the incorrect item.",
+    "typical_action": "REVIEW",
+    "risk_level": "MEDIUM",
+    "keywords": [
+      "damaged",
+      "broken",
+      "defective",
+      "wrong item",
+      "missing item",
+      "faulty",
+      "smashed",
+      "shattered",
+      "incorrect",
+      "cracked",
+      "leaked"
+    ],
+    "examples": [
+      "My glass vase arrived completely shattered into pieces! The box had zero bubble wrap. Order #112-9988112.",
+      "The laptop screen has vertical lines across it right out of the sealed box. It is defective.",
+      "I ordered a blue coffee maker, but you sent me a red blender instead! Wrong item delivered.",
+      "The shampoo bottle leaked all over the rest of my book order inside the package. Everything is ruined."
+    ],
+    "labeling_rules": [
+      "Classify as 'damaged_defective' if customer inquires about damaged / defective / wrong item.",
+      "Default risk category: MEDIUM.",
+      "Standard routing state: REVIEW."
+    ]
+  },
+  {
+    "intent": "payment_billing",
+    "name": "Payment & Billing Inquiries",
+    "description": "Double charges, unrecognized transaction lines, payment authorization failures, or gift card balance queries.",
+    "typical_action": "REVIEW",
+    "risk_level": "MEDIUM",
+    "keywords": [
+      "charged twice",
+      "double charge",
+      "billing",
+      "payment failed",
+      "bank",
+      "credit card",
+      "unrecognized charge",
+      "invoice",
+      "vat",
+      "tax",
+      "charged"
+    ],
+    "examples": [
+      "I was charged twice on my credit card for order #114-8877112! $89.99 charged two times.",
+      "Why is there a pending charge of $14.99 from Amazon Digital on my bank statement that I did not authorize?",
+      "My card payment failed at checkout even though there are sufficient funds and the card is active.",
+      "I applied a $50 gift card balance to my order, but my credit card was still charged the full amount."
+    ],
+    "labeling_rules": [
+      "Classify as 'payment_billing' if customer inquires about payment & billing inquiries.",
+      "Default risk category: MEDIUM.",
+      "Standard routing state: REVIEW."
+    ]
+  },
+  {
+    "intent": "account_security",
+    "name": "Account Access & Security Alerts",
+    "description": "Unauthorized account login, password reset lockout, 2FA issues, or suspected account compromise.",
+    "typical_action": "HUMAN",
+    "risk_level": "HIGH",
+    "keywords": [
+      "hacked",
+      "unauthorized",
+      "compromised",
+      "cannot login",
+      "password reset",
+      "otp",
+      "2fa",
+      "security alert",
+      "suspicious",
+      "phishing",
+      "lockout"
+    ],
+    "examples": [
+      "URGENT: Someone unauthorized logged into my Amazon account from another country and changed my shipping address!",
+      "I received an OTP verification code on my phone that I did not request. Is someone trying to hack my account?",
+      "My account has been locked due to suspicious activity, and I cannot access my Kindle library or pending orders.",
+      "Someone placed $800 worth of gift card orders on my account without my permission! Cancel them now!"
+    ],
+    "labeling_rules": [
+      "Classify as 'account_security' if customer inquires about account access & security alerts.",
+      "Default risk category: HIGH.",
+      "Standard routing state: HUMAN."
+    ]
+  },
+  {
+    "intent": "subscription_prime",
+    "name": "Prime Membership & Subscriptions",
+    "description": "Prime membership fees, subscription renewal, cancelling Prime, Prime Video access, or student discounts.",
+    "typical_action": "AUTO",
+    "risk_level": "LOW",
+    "keywords": [
+      "prime",
+      "membership",
+      "subscription",
+      "annual fee",
+      "prime video",
+      "cancel prime",
+      "auto renew",
+      "student",
+      "music unlimited"
+    ],
+    "examples": [
+      "I was charged $139 for an annual Prime renewal without any reminder email. I want to cancel and get a refund.",
+      "How do I pause or cancel my Prime membership before the next billing cycle?",
+      "My Prime Video app says I don't have an active subscription, but I paid for Amazon Prime yesterday.",
+      "Can I share my Prime shipping benefits with my spouse through Amazon Household?"
+    ],
+    "labeling_rules": [
+      "Classify as 'subscription_prime' if customer inquires about prime membership & subscriptions.",
+      "Default risk category: LOW.",
+      "Standard routing state: AUTO."
+    ]
+  },
+  {
+    "intent": "cancellation",
+    "name": "Order Cancellation Requests",
+    "description": "Requesting to cancel an order before dispatch or dealing with cancelled items.",
+    "typical_action": "AUTO",
+    "risk_level": "LOW",
+    "keywords": [
+      "cancel order",
+      "cancellation",
+      "cancel my item",
+      "stop order",
+      "cancel delivery",
+      "cancelled",
+      "cancel"
+    ],
+    "examples": [
+      "I ordered an item 10 minutes ago by mistake. How do I cancel order #114-7766554 before it ships?",
+      "The cancellation button is greyed out on my order page. Can you please cancel order #112-9933441?",
+      "I requested a cancellation yesterday, but today I got a notification that the item has shipped!",
+      "Can I cancel one single item out of an order with 3 items?"
+    ],
+    "labeling_rules": [
+      "Classify as 'cancellation' if customer inquires about order cancellation requests.",
+      "Default risk category: LOW.",
+      "Standard routing state: AUTO."
+    ]
+  },
+  {
+    "intent": "product_inquiry",
+    "name": "Product & Stock Inquiries",
+    "description": "Questions about product compatibility, seller warranty, restock dates, or technical specifications.",
+    "typical_action": "AUTO",
+    "risk_level": "LOW",
+    "keywords": [
+      "compatibility",
+      "in stock",
+      "restock",
+      "warranty",
+      "specifications",
+      "is this compatible",
+      "item details",
+      "specs",
+      "compatible"
+    ],
+    "examples": [
+      "Is the Kindle Paperwhite waterproof, and what is the battery life between charges?",
+      "When will the 256GB Space Gray tablet be back in stock from the official Amazon seller?",
+      "Does this Bluetooth speaker come with a manufacturer warranty in the US?",
+      "Is this phone case compatible with the wireless charging pad for iPhone 15?"
+    ],
+    "labeling_rules": [
+      "Classify as 'product_inquiry' if customer inquires about product & stock inquiries.",
+      "Default risk category: LOW.",
+      "Standard routing state: AUTO."
+    ]
+  },
+  {
+    "intent": "human_escalation_request",
+    "name": "Human Agent / Supervisor Request",
+    "description": "Explicit customer demands to speak directly to a live representative, human agent, manager, or supervisor.",
+    "typical_action": "HUMAN",
+    "risk_level": "HIGH",
+    "keywords": [
+      "speak to human",
+      "real person",
+      "human agent",
+      "supervisor",
+      "manager",
+      "transfer me",
+      "bot sucks",
+      "call me",
+      "representative",
+      "human"
+    ],
+    "examples": [
+      "I refuse to talk to an automated bot! Transfer me to a real human customer support agent right now.",
+      "Connect me with a supervisor or manager immediately. This issue has been going on for 3 weeks.",
+      "Can someone from Amazon customer service please call my phone number? I need a human.",
+      "Your automated system is completely useless. Give me an actual representative."
+    ],
+    "labeling_rules": [
+      "Classify as 'human_escalation_request' if customer inquires about human agent / supervisor request.",
+      "Default risk category: HIGH.",
+      "Standard routing state: HUMAN."
+    ]
+  },
+  {
+    "intent": "feedback_complaint",
+    "name": "Driver Feedback & Service Complaints",
+    "description": "Escalated complaints regarding rude delivery drivers, package mishandling, or systemic customer service dissatisfaction.",
+    "typical_action": "REVIEW",
+    "risk_level": "MEDIUM",
+    "keywords": [
+      "rude driver",
+      "thrown package",
+      "terrible service",
+      "complaint",
+      "unacceptable",
+      "formal complaint",
+      "disgusted",
+      "worst service"
+    ],
+    "examples": [
+      "Your delivery driver threw my package over an 8-foot locked gate onto the concrete driveway and broke it!",
+      "Driver left my package on the street curb in heavy rain instead of walking to the covered porch.",
+      "I want to file a formal complaint against the delivery carrier for reckless driving in our residential neighborhood.",
+      "Terrible customer service experience on the phone today. The representative hung up on me after 45 minutes on hold."
+    ],
+    "labeling_rules": [
+      "Classify as 'feedback_complaint' if customer inquires about driver feedback & service complaints.",
+      "Default risk category: MEDIUM.",
+      "Standard routing state: REVIEW."
+    ]
+  }
+]

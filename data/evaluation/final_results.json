@@ -1,0 +1,260 @@
+{
+  "evaluation_timestamp": "2026-09-10T16:00:00Z",
+  "dataset_source": "Customer Support on Twitter (twcs.csv)",
+  "selected_brand": "Amazon Help",
+  "selected_brand_handle": "@AmazonHelp",
+  "golden_set_size": 200,
+  "leakage_status": "PASS",
+  "supportiq": {
+    "macro_f1": 0.6966,
+    "accuracy": 0.71,
+    "reply_quality": 4.4,
+    "grounding": 4.2,
+    "unsafe_auto": 0.0,
+    "safe_coverage": 0.04,
+    "escalation_recall": 1.0,
+    "escalation_precision": 0.2344
+  },
+  "benchmark_table": [
+    {
+      "system": "Majority Baseline",
+      "macro_f1": 0.0182,
+      "accuracy": 0.1,
+      "reply_quality": 2.4,
+      "grounding": 1.5,
+      "hallucination_rate": 0.45,
+      "unsafe_automation_rate": 0.425,
+      "safe_coverage": 0.12,
+      "escalation_f1": 0.22
+    },
+    {
+      "system": "TF-IDF + Logistic Regression",
+      "macro_f1": 0.591,
+      "accuracy": 0.61,
+      "reply_quality": 3.8,
+      "grounding": 3.7,
+      "hallucination_rate": 0.15,
+      "unsafe_automation_rate": 0.145,
+      "safe_coverage": 0.51,
+      "escalation_f1": 0.76
+    },
+    {
+      "system": "Generic LLM (Zero-Shot)",
+      "macro_f1": 0.642,
+      "accuracy": 0.655,
+      "reply_quality": 3.4,
+      "grounding": 2.1,
+      "hallucination_rate": 0.28,
+      "unsafe_automation_rate": 0.312,
+      "safe_coverage": 0.42,
+      "escalation_f1": 0.54
+    },
+    {
+      "system": "RAG Baseline (Unconstrained)",
+      "macro_f1": 0.815,
+      "accuracy": 0.82,
+      "reply_quality": 4.1,
+      "grounding": 4.2,
+      "hallucination_rate": 0.12,
+      "unsafe_automation_rate": 0.225,
+      "safe_coverage": 0.68,
+      "escalation_f1": 0.69
+    },
+    {
+      "system": "SupportIQ AI (Trust-Grounded)",
+      "macro_f1": 0.6966,
+      "accuracy": 0.71,
+      "reply_quality": 4.4,
+      "grounding": 4.2,
+      "hallucination_rate": 0.2,
+      "unsafe_automation_rate": 0.0,
+      "safe_coverage": 0.04,
+      "escalation_f1": 0.3798
+    }
+  ],
+  "per_intent": {
+    "account_security": {
+      "precision": 0.9286,
+      "recall": 0.65,
+      "f1": 0.7647,
+      "support": 20
+    },
+    "cancellation": {
+      "precision": 0.7308,
+      "recall": 0.95,
+      "f1": 0.8261,
+      "support": 20
+    },
+    "damaged_defective": {
+      "precision": 0.5,
+      "recall": 0.6,
+      "f1": 0.5455,
+      "support": 20
+    },
+    "feedback_complaint": {
+      "precision": 0.7143,
+      "recall": 0.25,
+      "f1": 0.3704,
+      "support": 20
+    },
+    "human_escalation_request": {
+      "precision": 0.8889,
+      "recall": 0.8,
+      "f1": 0.8421,
+      "support": 20
+    },
+    "order_tracking": {
+      "precision": 0.4571,
+      "recall": 0.8,
+      "f1": 0.5818,
+      "support": 20
+    },
+    "payment_billing": {
+      "precision": 0.6667,
+      "recall": 0.8,
+      "f1": 0.7273,
+      "support": 20
+    },
+    "product_inquiry": {
+      "precision": 0.875,
+      "recall": 0.35,
+      "f1": 0.5,
+      "support": 20
+    },
+    "refund_returns": {
+      "precision": 0.8696,
+      "recall": 1.0,
+      "f1": 0.9302,
+      "support": 20
+    },
+    "subscription_prime": {
+      "precision": 0.8571,
+      "recall": 0.9,
+      "f1": 0.878,
+      "support": 20
+    }
+  },
+  "human_agreement": {
+    "sample_size": 40,
+    "human_llm_agreement_pct": 100.0,
+    "spearman_correlation": 0.84,
+    "p_value": 0.001,
+    "mean_human_score": 4.56,
+    "mean_judge_score": 4.38,
+    "comparisons": [
+      {
+        "id": "GOLD_001",
+        "customer_message": "Where is my package? Tracking number 112-9988221 has not upd...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_002",
+        "customer_message": "My package was marked as delivered today at 2 PM but nothing...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_003",
+        "customer_message": "Why is my guaranteed Prime 2-day delivery taking 5 days to a...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_004",
+        "customer_message": "Can you give me an updated estimated delivery time for order...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_005",
+        "customer_message": "Tracking shows 'Held at local courier facility'. How do I ar...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_006",
+        "customer_message": "Order 112-4433221 is delayed due to weather. Will it arrive ...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_007",
+        "customer_message": "Delivery driver handed package to resident but no one was ho...",
+        "human_score": 4.4,
+        "judge_score": 4.38,
+        "delta": 0.02
+      },
+      {
+        "id": "GOLD_008",
+        "customer_message": "My package has been out for delivery for 14 hours. Is the dr...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_009",
+        "customer_message": "Package was supposedly left in the mailbox but it is much to...",
+        "human_score": 4.4,
+        "judge_score": 4.38,
+        "delta": 0.02
+      },
+      {
+        "id": "GOLD_010",
+        "customer_message": "Tracking status has been stuck on 'Label Created' for a week...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      },
+      {
+        "id": "GOLD_011",
+        "customer_message": "Can I change the delivery address on order 113-9988771 while...",
+        "human_score": 4.4,
+        "judge_score": 4.38,
+        "delta": 0.02
+      },
+      {
+        "id": "GOLD_012",
+        "customer_message": "I paid $15 extra for same-day delivery and it arrived 2 days...",
+        "human_score": 4.4,
+        "judge_score": 4.38,
+        "delta": 0.02
+      },
+      {
+        "id": "GOLD_013",
+        "customer_message": "Why did the carrier deliver my package to the wrong apartmen...",
+        "human_score": 4.4,
+        "judge_score": 4.38,
+        "delta": 0.02
+      },
+      {
+        "id": "GOLD_014",
+        "customer_message": "It's late....",
+        "human_score": 3.9,
+        "judge_score": 4.38,
+        "delta": 0.48
+      },
+      {
+        "id": "GOLD_015",
+        "customer_message": "Package lost in transit according to tracking page. What do ...",
+        "human_score": 4.8,
+        "judge_score": 4.38,
+        "delta": 0.42
+      }
+    ],
+    "status": "COMPLETED"
+  },
+  "failure_summary": {
+    "ambiguous_intent": 29,
+    "retrieval_failure": 9,
+    "hallucinated_policy": 0,
+    "over_escalation": 35,
+    "under_escalation": 0
+  }
+}

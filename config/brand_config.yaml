@@ -1,0 +1,114 @@
+brand:
+  name: "Amazon Help"
+  id: "AmazonHelp"
+  twitter_handle: "@AmazonHelp"
+  industry: "E-Commerce & Digital Services"
+  description: "Customer service for orders, shipments, returns, refunds, Prime memberships, and account support."
+
+intent_taxonomy:
+  - id: "order_tracking"
+    name: "Order Tracking & Delivery Delay"
+    description: "Inquiries regarding package shipping status, estimated delivery dates, carrier delays, or tracking issues."
+    typical_action: "AUTO"
+    risk_level: "LOW"
+    keywords: ["tracking", "where is my order", "shipped", "delivery", "late", "arrived", "carrier", "transit", "package", "where is it", "out for delivery"]
+
+  - id: "refund_returns"
+    name: "Refund & Return Inquiries"
+    description: "Questions about return drop-off, return labels, refund status, and refund processing timeframes."
+    typical_action: "AUTO"
+    risk_level: "LOW"
+    keywords: ["refund", "return", "returned", "drop off", "return label", "money back", "reimbursement", "refund status", "credit", "exchange"]
+
+  - id: "damaged_defective"
+    name: "Damaged / Defective / Wrong Item"
+    description: "Reports of items arriving broken, opened, missing components, or receiving the incorrect item."
+    typical_action: "REVIEW"
+    risk_level: "MEDIUM"
+    keywords: ["damaged", "broken", "defective", "wrong item", "missing item", "faulty", "smashed", "shattered", "incorrect", "cracked", "leaked"]
+
+  - id: "payment_billing"
+    name: "Payment & Billing Inquiries"
+    description: "Double charges, unrecognized transaction lines, payment authorization failures, or gift card balance queries."
+    typical_action: "REVIEW"
+    risk_level: "MEDIUM"
+    keywords: ["charged twice", "double charge", "billing", "payment failed", "bank", "credit card", "unrecognized charge", "invoice", "vat", "tax", "charged"]
+
+  - id: "account_security"
+    name: "Account Access & Security Alerts"
+    description: "Unauthorized account login, password reset lockout, 2FA issues, or suspected account compromise."
+    typical_action: "HUMAN"
+    risk_level: "HIGH"
+    keywords: ["hacked", "unauthorized", "compromised", "cannot login", "password reset", "otp", "2fa", "security alert", "suspicious", "phishing", "lockout"]
+
+  - id: "subscription_prime"
+    name: "Prime Membership & Subscriptions"
+    description: "Prime membership fees, subscription renewal, cancelling Prime, Prime Video access, or student discounts."
+    typical_action: "AUTO"
+    risk_level: "LOW"
+    keywords: ["prime", "membership", "subscription", "annual fee", "prime video", "cancel prime", "auto renew", "student", "music unlimited"]
+
+  - id: "cancellation"
+    name: "Order Cancellation Requests"
+    description: "Requesting to cancel an order before dispatch or dealing with cancelled items."
+    typical_action: "AUTO"
+    risk_level: "LOW"
+    keywords: ["cancel order", "cancellation", "cancel my item", "stop order", "cancel delivery", "cancelled", "cancel"]
+
+  - id: "product_inquiry"
+    name: "Product & Stock Inquiries"
+    description: "Questions about product compatibility, seller warranty, restock dates, or technical specifications."
+    typical_action: "AUTO"
+    risk_level: "LOW"
+    keywords: ["compatibility", "in stock", "restock", "warranty", "specifications", "is this compatible", "item details", "specs", "compatible"]
+
+  - id: "human_escalation_request"
+    name: "Human Agent / Supervisor Request"
+    description: "Explicit customer demands to speak directly to a live representative, human agent, manager, or supervisor."
+    typical_action: "HUMAN"
+    risk_level: "HIGH"
+    keywords: ["speak to human", "real person", "human agent", "supervisor", "manager", "transfer me", "bot sucks", "call me", "representative", "human"]
+
+  - id: "feedback_complaint"
+    name: "Driver Feedback & Service Complaints"
+    description: "Escalated complaints regarding rude delivery drivers, package mishandling, or systemic customer service dissatisfaction."
+    typical_action: "REVIEW"
+    risk_level: "MEDIUM"
+    keywords: ["rude driver", "thrown package", "terrible service", "complaint", "unacceptable", "formal complaint", "disgusted", "worst service"]
+
+retrieval:
+  top_k: 5
+  similarity_metric: "cosine"
+  min_similarity_threshold: 0.35
+  high_confidence_similarity: 0.60
+  min_evidence_count_for_auto: 1
+
+trust_engine:
+  weights:
+    intent_confidence: 0.40
+    evidence_quality: 0.35
+    historical_consistency: 0.15
+    safety_score: 0.10
+  thresholds:
+    auto_handle_min_trust: 70.0
+    review_recommended_min_trust: 50.0
+    min_intent_confidence_for_auto: 0.60
+    min_evidence_quality_for_auto: 0.45
+
+escalation_policy:
+  auto_escalate_intents:
+    - "account_security"
+    - "human_escalation_request"
+  sensitive_keywords:
+    - "lawyer"
+    - "attorney"
+    - "legal action"
+    - "sue"
+    - "police"
+    - "fraud"
+    - "hacked"
+    - "stolen card"
+    - "chargeback"
+    - "press"
+    - "journalist"
+    - "court"

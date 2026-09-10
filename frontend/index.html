@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupportIQ AI — Evidence-Grounded Customer Support Platform</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js for interactive evaluation and analytics charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-badge">IQ</div>
+        <div>
+          <div class="brand-title">SupportIQ AI</div>
+          <div class="brand-subtitle">Trust & Escalation</div>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a class="nav-item active" data-view="dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="support">
+            <i data-lucide="message-square-text"></i>
+            <span>Support Workspace</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="intents">
+            <i data-lucide="brain"></i>
+            <span>Intent Intelligence</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="evidence">
+            <i data-lucide="search"></i>
+            <span>Evidence Explorer</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="trust">
+            <i data-lucide="shield-check"></i>
+            <span>Trust & Escalation</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="evaluation">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Model Benchmark</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="golden">
+            <i data-lucide="flask-conical"></i>
+            <span>Golden Set (200)</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="failures">
+            <i data-lucide="alert-triangle"></i>
+            <span>Failure Analysis</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="analytics">
+            <i data-lucide="trending-up"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="decision-log">
+            <i data-lucide="file-text"></i>
+            <span>Decision Log</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="settings">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div style="font-size: 11px; color: var(--text-muted);">ACTIVE BRAND</div>
+        <div class="brand-indicator">
+          <span style="font-weight: 600; color: var(--text-primary);">Amazon Help</span>
+          <span class="badge badge-blue">@AmazonHelp</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Navigation Bar -->
+      <header class="top-bar">
+        <div class="page-title-area">
+          <h1 class="page-title" id="current-view-title">Executive Dashboard</h1>
+          <p class="page-desc" id="current-view-desc">High-level operational performance and evidence grounding metrics.</p>
+        </div>
+
+        <div class="top-actions">
+          <span class="badge badge-green" id="system-status-badge">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+            Pipeline Active
+          </span>
+          <button class="btn btn-secondary" id="btn-quick-run-eval" style="padding: 6px 12px; font-size: 12px;">
+            <i data-lucide="play" style="width: 14px; height: 14px;"></i> Run Benchmark
+          </button>
+        </div>
+      </header>
+
+      <!-- View Containers -->
+      <div class="view-content" id="view-container">
+        <!-- Rendered dynamically by app.js -->
+        <div style="text-align: center; padding: 40px; color: var(--text-muted);">Loading SupportIQ AI...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
